@@ -1,8 +1,6 @@
 package com.galvez.salvador.backend.models;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+
+import jakarta.persistence.*;
 
 @Entity
 public class Task {
@@ -11,19 +9,22 @@ public class Task {
     private Long id;
     private String title;
     private String description;
+    private boolean status;
 
     public Task() {
     }
 
-    public Task(String title, String description) {
+    public Task(String title, String description, boolean status) {
         this.title = title;
         this.description = description;
+        this.status = status;
     }
 
-    public Task(Long id, String title, String description) {
+    public Task(Long id, String title, String description, boolean status) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.status = status;
     }
 
     public Long getId() {
@@ -48,5 +49,13 @@ public class Task {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }
