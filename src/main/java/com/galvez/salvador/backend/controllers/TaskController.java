@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/tasks")
 @Tag(name = "Tareas", description = "API para gestionar tareas")
+@CrossOrigin(origins = "*")
 public class TaskController {
     @Autowired
     private TaskService taskService;
