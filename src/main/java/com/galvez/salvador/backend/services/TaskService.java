@@ -1,11 +1,13 @@
 package com.galvez.salvador.backend.services;
 
+import com.galvez.salvador.backend.exceptions.ResourceNotFoundException;
 import com.galvez.salvador.backend.models.Task;
 import com.galvez.salvador.backend.repositories.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TaskService {
@@ -17,7 +19,8 @@ public class TaskService {
     }
 
     public Task findById(Long id) {
-        return taskRepository.findById(id).get();
+        return taskRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("La tarea con el id " + id + " no existe."));
     }
 
     public Task create(Task task) {
@@ -26,7 +29,7 @@ public class TaskService {
 
     public Task update(Long id, Task task) {
         if (!taskRepository.existsById(id)) {
-            return null;
+            throw new ResourceNotFoundException("La tarea con el id " + id + " no existe.");
         }
         task.setId(id);
         return taskRepository.save(task);
